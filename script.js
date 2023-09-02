@@ -42,12 +42,15 @@ const handleCategory=async()=>{
 
 // create a function 
 const handleLoadNews= async(categoryId)=>{
+    console.log(categoryId);
     // fetch the news from news category by category id 
     // to put any dynamic value use template string
     const response = await fetch(`https://openapi.programming-hero.com/api/news/category/${categoryId}`);
     const data = await response.json();
     //get the card container
     const cardContainer = document.getElementById('card-container');
+    // clear the div 
+    cardContainer.innerHTML = "";
     //run loop to each data 
     data.data?.forEach((news) => {
         const div = document.createElement('div');
@@ -61,6 +64,7 @@ const handleLoadNews= async(categoryId)=>{
             <div class="badge badge-secondary">${news?.rating?.badge}</div>
           </h2>
           <p>${news.details.slice(0,100)}</p>
+          <h3>Total Views: ${news.total_view?news.total_view:"No view"}</h3>
           <div class="px-2 flex justify-between">
           <div class="flex">
             <div class="avatar online pr-2">
@@ -74,7 +78,7 @@ const handleLoadNews= async(categoryId)=>{
             </div>
           </div>
           <div>
-            <button class="btn btn-active btn-neutral">Button</button>
+            <button class="btn btn-active btn-neutral">DETAILS</button>
           </div>
         </div>
         </div>
@@ -86,3 +90,5 @@ const handleLoadNews= async(categoryId)=>{
 
 
 handleCategory();
+//globally call to see default data
+handleLoadNews("01");
