@@ -95,7 +95,6 @@ const handleModal = async(newsId) =>{
     const modalContainer = document.getElementById('modal-container');
     const div = document.createElement('div');
     div.innerHTML = `
-        <button class="btn" onclick="my_modal_1.showModal()">open modal</button>
         <dialog id="my_modal_1" class="modal">
         <form method="dialog" class="modal-box">
             <img class="mx-auto" src=${data.data[0]?.thumbnail_url} alt="">    
