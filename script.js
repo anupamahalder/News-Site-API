@@ -10,7 +10,7 @@ const loadCategory2 = async () =>{
     // await keyword will help to wait until the data is not fetched then it can goes down otherwise not
     const response = await fetch("https://openapi.programming-hero.com/api/news/categories");
     const data = response.json();
-    console.log(data);
+    // console.log(data);
 }
 
 // loadCategory();
@@ -22,7 +22,7 @@ const handleCategory=async()=>{
     const response = await fetch("https://openapi.programming-hero.com/api/news/categories");
     const data = await response.json();
     //object to object
-    console.log(data.data.news_category);
+    // console.log(data.data.news_category);
 
     //get the tab container
     const tabContainer = document.getElementById('tab-container');
@@ -42,7 +42,7 @@ const handleCategory=async()=>{
 
 // create a function 
 const handleLoadNews= async(categoryId)=>{
-    console.log(categoryId);
+    // console.log(categoryId);
     // fetch the news from news category by category id 
     // to put any dynamic value use template string
     const response = await fetch(`https://openapi.programming-hero.com/api/news/category/${categoryId}`);
@@ -102,7 +102,7 @@ const handleLoadNews= async(categoryId)=>{
 const handleModal = async(newsId) =>{
     const response = await fetch(`https://openapi.programming-hero.com/api/news/${newsId}`);
     const data = await response.json();
-    console.log(data.data[0]);
+    // console.log(data.data[0]);
     const modalContainer = document.getElementById('modal-container');
     const div = document.createElement('div');
     div.innerHTML = `
