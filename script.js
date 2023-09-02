@@ -78,7 +78,7 @@ const handleLoadNews= async(categoryId)=>{
             </div>
           </div>
           <div>
-            <button class="btn btn-active btn-neutral">DETAILS</button>
+            <button onclick="handleModal('${news._id}')" class="btn btn-active btn-neutral">DETAILS</button>
           </div>
         </div>
         </div>
@@ -87,6 +87,34 @@ const handleLoadNews= async(categoryId)=>{
         cardContainer.appendChild(div);
     });
 };
+//Handle modal
+const handleModal = async(newsId) =>{
+    const response = await fetch(`https://openapi.programming-hero.com/api/news/${newsId}`);
+    const data = await response.json();
+    console.log(data.data[0]);
+    const modalContainer = document.getElementById('modal-container');
+    const div = document.createElement('div');
+    div.innerHTML = `
+        <button class="btn" onclick="my_modal_1.showModal()">open modal</button>
+        <dialog id="my_modal_1" class="modal">
+        <form method="dialog" class="modal-box">
+            <img class="mx-auto" src=${data.data[0]?.thumbnail_url} alt="">    
+            <div class="p-4">
+                <h1 class="text-2xl font-bold py-2">${data.data[0]?.title}</h1>
+                <p>${data.data[0]?.details}</p>
+            </div>
+            <div class="modal-action">
+                <button class="btn mx-auto">Close</button>
+            </div>
+        </form>
+        </dialog>
+    `;
+    modalContainer.appendChild(div);
+    //call the modal
+    const modal = document.getElementById("my_modal_1");
+    modal.showModal();
+}
+
 
 
 handleCategory();
