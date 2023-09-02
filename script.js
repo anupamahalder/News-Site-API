@@ -51,35 +51,46 @@ const handleLoadNews= async(categoryId)=>{
     const cardContainer = document.getElementById('card-container');
     // clear the div 
     cardContainer.innerHTML = "";
+
+    //
+    if(data.status == false){
+        const h1 = document.createElement('h1');
+        h1.innerText = "No data found!";
+        h1.style.margin=50;
+        cardContainer.appendChild(h1);
+        return;
+    };
     //run loop to each data 
     data.data?.forEach((news) => {
         const div = document.createElement('div');
         // create innerHTML 
         div.innerHTML = `
-        <div class="card w-96 mx-auto bg-base-100 shadow-xl">
+        <div class="card-80 md:w-96 mx-auto bg-base-100 shadow-xl">
         <figure><img src=${news?.image_url} alt="news" /></figure>
         <div class="card-body">
-          <h2 class="card-title">
-            ${news.title.slice(0,40)}
+        <h2 class="card-title">
+        ${news.title.slice(0,40)}
             <div class="badge badge-secondary">${news?.rating?.badge}</div>
-          </h2>
-          <p>${news.details.slice(0,100)}</p>
-          <h3>Total Views: ${news.total_view?news.total_view:"No view"}</h3>
-          <div class="px-2 flex justify-between">
-          <div class="flex">
-            <div class="avatar online pr-2">
-                <div class="w-10 rounded-full">
-                    <img src=${news?.author?.img} />
+        </h2>
+        <p>${news.details.slice(0,100)}</p>
+        <h3>Total Views: ${news.total_view?news.total_view:"No view"}</h3>
+        <div class="px-2 md:flex justify-between">
+            <div class="flex">
+                <div class="avatar online pr-2">
+                    <div class="w-14 rounded-full">
+                        <img src=${news?.author?.img} />
+                    </div>
+                </div>
+                <div>
+                    <p>${news.author.name?news.author.name:"Unknown"}</p>
+                    <p>${news.author.published_date?news.author.published_date:""}</p>
                 </div>
             </div>
-            <div>
-              <p>${news?.author?.name}</p>
-              <p>${news?.author?.published_date}</p>
+            <div class="mt-4 flex justify-center md:mt-0">
+                <div>
+                    <button onclick="handleModal('${news._id}')" class="btn btn-active btn-neutral">DETAILS</button>
+                </div>
             </div>
-          </div>
-          <div>
-            <button onclick="handleModal('${news._id}')" class="btn btn-active btn-neutral">DETAILS</button>
-          </div>
         </div>
         </div>
       </div>
