@@ -56,7 +56,7 @@ const handleLoadNews= async(categoryId)=>{
     if(data.status == false){
         const h1 = document.createElement('h1');
         h1.innerText = "No data found!";
-        h1.style.margin=50;
+        h1.style.marging=50;
         cardContainer.appendChild(h1);
         return;
     };
